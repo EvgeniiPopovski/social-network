@@ -1,27 +1,18 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Post/Post.jsx'
+import NewPost from "./NewPost";
 
-const NewPost = () => {
-    return (
-        <div>
-            <h3> My posts </h3>
-            <div>
-                <textarea> </textarea>
-            </div>
-            <div>
-                <button>Отправить</button>
-            </div>
-        </div>
-    )
-}
 
-const MyPosts = () => {
+
+
+
+const MyPosts = (props) => {
+    let post = props.posts.map((post)=>(<Post message={post.message} id={post.id} />))
     return (
         <div className={s.posts}>
             <NewPost/>
-            <Post message='Hello word' />
-            <Post message='Hello puki4' />
+           {post}
         </div>
     )
 }
