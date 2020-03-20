@@ -1,0 +1,14 @@
+.item {
+    color: white;
+    font-weight: 600px;
+    padding: 5px;
+}
+
+.item:nth-of-type(1){
+    margin-top: 15px;
+}
+
+.item img {
+    width: 50px;
+    border-radius: 50%;
+}

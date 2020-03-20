@@ -1,0 +1,60 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    color: white;
+    font-size: 14pt;
+}
+
+.dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.dialogItem{
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid white;
+    flex-basis: 50px;
+    margin-bottom: 10px;
+    width: auto;
+    padding-left: 10px;
+    vertical-align: center;
+}
+
+.dialog a {
+    text-decoration: none;
+    font-style: italic;
+}
+
+.dialog a:visited {
+    color: white;
+}
+
+.dialog a.active {
+    color: black;
+}
+
+.dialog a:active {
+    color: black;
+}
+
+.dialog a:hover {
+    background-color: rgba(2, 88, 145, 0.356);
+    color: black;
+}
+
+.dialogItem:before{
+    content: '';
+    display: block;
+    position: relative;
+    float: left;
+    height: 50px;
+    width: 50px;
+    background-color: antiquewhite;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+

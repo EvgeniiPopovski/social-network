@@ -1,0 +1,30 @@
+.wrapWalper{
+    height: 300px;
+    width: 100%
+}
+.walper {
+   object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.wrapper {
+    display: flex;
+    padding: 15px;
+    border: 1px solid white;
+
+}
+.avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: antiquewhite;
+    vertical-align: middle;
+    text-align: center;
+}
+.description {
+    color: white;
+    font-size: 16pt;
+    font-style: italic;
+    text-decoration: underline;
+    margin-left: 20px;
+}
