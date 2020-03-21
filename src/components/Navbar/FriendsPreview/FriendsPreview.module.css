@@ -1,0 +1,23 @@
+.friendsCard {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.friendMiniImage {
+    width: 42px;
+    height: 42px;
+    background-color: antiquewhite;
+    border: 2px solid rgba(238, 29, 86, 0.23);
+    border-radius: 50%;
+    text-align: center;
+}
+.friendsName {
+    font-size: 10pt;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    width: 100%;
+}

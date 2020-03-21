@@ -28,6 +28,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -70,6 +75,7 @@
       <workItem from="1584619197828" duration="9555000" />
       <workItem from="1584684104607" duration="1122000" />
       <workItem from="1584708339967" duration="2180000" />
+      <workItem from="1584799164238" duration="10847000" />
     </task>
     <servers />
   </component>

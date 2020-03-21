@@ -117,3 +117,17 @@
         margin-bottom: 10px;
     }
 }
+
+.friendListPreview {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.friendListPreview p {
+    color: white;
+    font-size: 28pt;
+    text-align: center;
+    width:100%;
+    margin-top: 60px;
+    margin-bottom: 10px;
+}

@@ -8,7 +8,7 @@ grid-template-areas:
   'n c';
 
   grid-template-rows: 50px auto;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 20% 80%;
   gap: 10px;
 }
 .app-content {
