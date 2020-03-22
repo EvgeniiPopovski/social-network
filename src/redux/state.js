@@ -29,7 +29,14 @@ let state = {
             {name: "Женуша Поповская", id: 3}
         ]
     }
-
 }
+
+export const addNewPost = (postMessage) => {
+    let newPost = {
+        message: postMessage,
+        id: state.profilePage.posts.length + 1
+    };
+    state.profilePage.posts.push(newPost)
+};
 
 export default state
