@@ -26,6 +26,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -77,6 +78,7 @@
       <workItem from="1584708339967" duration="2180000" />
       <workItem from="1584799164238" duration="10847000" />
       <workItem from="1584884923335" duration="2542000" />
+      <workItem from="1584948298141" duration="8512000" />
     </task>
     <servers />
   </component>

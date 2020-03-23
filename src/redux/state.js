@@ -1,3 +1,7 @@
+let renderIntireTree = () => {
+    console.log('State changed')
+}
+
 let state = {
     profilePage: {
         posts: [
@@ -6,6 +10,7 @@ let state = {
             {message: "Привет, Пятро", id: 3},
             {message: 'First Post', id: 4}
         ],
+        newPostText: ''
     },
     messagesPage: {
         dialogs: [
@@ -29,14 +34,26 @@ let state = {
             {name: "Женуша Поповская", id: 3}
         ]
     }
-}
+};
 
-export const addNewPost = (postMessage) => {
+export const addNewPost = () => {
     let newPost = {
-        message: postMessage,
+        message: state.profilePage.newPostText,
         id: state.profilePage.posts.length + 1
     };
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    updatePostText('')
+    renderIntireTree();
 };
+
+export const updatePostText = (newText) =>{
+    state.profilePage.newPostText = newText;
+    renderIntireTree();
+}
+
+//  Паттерн   функуция обсервер
+export const subscribe = (observer) => {
+    renderIntireTree = observer;
+}
 
 export default state

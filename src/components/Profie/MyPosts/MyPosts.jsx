@@ -8,10 +8,10 @@ import NewPost from "./NewPost";
 
 
 const MyPosts = (props) => {
-    let post = props.posts.map((post)=>(<Post message={post.message} id={post.id} />))
+    let post = props.posts.posts.map((post)=>(<Post message={post.message} id={post.id} />))
     return (
         <div className={s.posts}>
-            <NewPost addNewPost={props.addNewPost}/>
+            <NewPost newPostText={props.posts.newPostText} addNewPost={props.addNewPost} updatePostText={props.updatePostText}/>
            {post}
         </div>
     )
