@@ -9,8 +9,8 @@ const Dialogs = (props) => {
         props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id}/>));
     let messagesElements =
         props.messages.map((message) => (<MessageItem text={message.text} id={message.id}/>));
-    const textMailRef = React.createRef();
 
+    const textMailRef = React.createRef();
     let addMessage = ()=>{
         let text = textMailRef.current.value;
         alert(text);

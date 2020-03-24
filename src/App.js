@@ -10,6 +10,7 @@ import Music from './components/Music/Music.jsx';
 import Settings from './components/Settings/Settings.jsx'
 
 const App = (props) => {
+    debugger;
   return (
       <div className='app-wrapper'>
         <Header/>

@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Navbar.module.css'
 import { NavLink } from 'react-router-dom';
-import FreindsPreview from "./FriendsPreview/FriendsPreview";
+import FriendsPreview from "./FriendsPreview/FriendsPreview";
 
 const Navbar = (props) => {
 
-    let friendsListPreviw = props.friends.map( (friend) => (<FreindsPreview name={friend.name} id={friend.id}/>))
+    let friendsListPreviw = props.friends.map( (friend) => (<FriendsPreview name={friend.name} id={friend.id}/>))
 
     return (
         <nav className={s.nav}>

@@ -1,6 +1,7 @@
 import React from "react";
 
 const NewPost = (props) => {
+    debugger;
 
     const textAreaRef = React.createRef();
     let addPost = () => {

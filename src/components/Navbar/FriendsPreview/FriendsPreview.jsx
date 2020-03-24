@@ -1,7 +1,7 @@
 import React from "react";
 import s from './FriendsPreview.module.css'
 
-const FreindsPreview = (props) => {
+const FriendsPreview = (props) => {
 
     return (
         <div className={s.friendsCard}>
@@ -15,4 +15,4 @@ const FreindsPreview = (props) => {
     )
 }
 
-export default FreindsPreview
+export default FriendsPreview
