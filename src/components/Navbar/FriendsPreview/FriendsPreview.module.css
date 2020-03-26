@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 33%;
     align-items: center;
-    margin-bottom: 5px;
 }
 
 .friendMiniImage {
@@ -20,4 +19,12 @@
     color: black;
     text-align: center;
     width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .friendsCard {
+        display: none;
+    }
+
+
 }

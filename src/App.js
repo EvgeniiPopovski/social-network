@@ -10,16 +10,18 @@ import Music from './components/Music/Music.jsx';
 import Settings from './components/Settings/Settings.jsx'
 
 const App = (props) => {
-    debugger;
+
   return (
       <div className='app-wrapper'>
         <Header/>
         <Navbar friends={props.state.navbarPage.friends}/>
         <div className="app-content">
           <Route path='/dialogs' render={() => (
-              <Dialogs dialogs={props.state.messagesPage.dialogs} messages={props.state.messagesPage.messages}/>)}/>
+              <Dialogs dialogs={props.state.messagesPage.dialogs}
+                       messages={props.state.messagesPage.messages}
+                       dispatch={props.dispatch}/>)}/>
           <Route path='/profile'
-                 render={() => (<Profile  posts={props.state.profilePage} addNewPost={props.addNewPost} updatePostText={props.updatePostText} />)}/>
+                 render={() => (<Profile  posts={props.state.profilePage} dispatch={props.dispatch} />)}/>
           <Route path='/news' component={News}/>
           <Route path='/music' component={Music}/>
           <Route path='/settings' component={Settings}/>

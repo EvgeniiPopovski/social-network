@@ -1,3 +1,8 @@
+const ADD_NEW_POST = 'ADD-NEW-POST';
+const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const UPDATE_MESSAGE_TEXT = 'UDATE-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 let store = {
     _state: {
         profilePage: {
@@ -22,7 +27,8 @@ let store = {
                 {text: "Хай, йоу!", id: 3},
                 {text: "Nixao!", id: 4},
                 {text: "Darova", id: 5},
-            ]
+            ],
+            newMessageText: '',
         },
         navbarPage: {
             friends: [
@@ -32,28 +38,80 @@ let store = {
             ]
         }
     },
+    getState () {
+        return this._state;
+    },
+    subscribe(observer) {
+        this.renderIntireTree = observer;
+    },
     renderIntireTree() {
         console.log('State changed')
     },
-    addNewPost() {
+
+    //Переносим в dispatch()
+    /*addNewPost() {
+
         let newPost = {
             message: this._state.profilePage.newPostText,
             id: this._state.profilePage.posts.length + 1
         };
         this._state.profilePage.posts.push(newPost);
-        this.updatePostText('')
-        this.renderIntireTree();
+        this.updatePostText('');
+        this.renderIntireTree(this._state);
     },
     updatePostText(newText) {
         this._state.profilePage.newPostText = newText;
         this.renderIntireTree(this._state);
     },
-    subscribe(observer) {
-        this.renderIntireTree = observer;
-    },
-    getState () {
-        return this._state;
+*/
+
+    dispatch(action) {
+        // для newPost
+        if (action.type === ADD_NEW_POST) {
+            let newPost = {
+                message: this._state.profilePage.newPostText,
+                id: this._state.profilePage.posts.length + 1
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = ""
+            this.renderIntireTree(this._state);
+        }
+        else if (action.type === UPDATE_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText;
+            this.renderIntireTree(this._state);
+        }
+        else if (action.type === UPDATE_MESSAGE_TEXT) {
+            this._state.messagesPage.newMessageText = action.text;
+            console.log(this._state.messagesPage.newMessageText)
+            this.renderIntireTree(this._state);
+        }
+        else if  (action.type === SEND_MESSAGE) {
+            let message =  {
+                text: this._state.messagesPage.newMessageText ,
+                id: this._state.messagesPage.messages.length + 1,
+            };
+            this._state.messagesPage.messages.push(message);
+            this._state.messagesPage.newMessageText = '';
+            this.renderIntireTree(this._state);
+        }
     }
 };
+
+
+export const addPostActionCreator = () => {
+    return {type: ADD_NEW_POST }
+};
+
+export const updatePostTextActionCreator = (text) => {
+    return {type: UPDATE_POST_TEXT, newText: text}
+};
+
+export const addMessageActionCreator = (message) => {
+    return {type: SEND_MESSAGE, text: message}
+};
+
+export const updateMessageTextActionCreator = (mesasge) => {
+    return {type:UPDATE_MESSAGE_TEXT, text: mesasge }
+}
 
 export default store;
