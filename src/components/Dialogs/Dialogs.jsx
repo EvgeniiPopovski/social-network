@@ -13,13 +13,13 @@ const Dialogs = (props) => {
 
     const textMailRef = React.createRef();
 
-    let updateMessageText = () => {
-        let message = textMailRef.current.value;
+    let updateMessageText = (e) => {
+        let message = e.target.value;
         props.dispatch(updateMessageTextActionCreator(message));
     };
 
-    let addMessage = () => {
-        let message = textMailRef.current.value;
+    let addMessage = (e) => {
+        let message = e.target.value;
         props.dispatch(addMessageActionCreator(message));
 
     }
@@ -33,7 +33,7 @@ const Dialogs = (props) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea ref={textMailRef} onChange={updateMessageText}></textarea> <br></br>
+                <textarea  onChange={updateMessageText}></textarea> <br></br>
                 <button onClick={addMessage}>Отправить</button>
             </div>
         </div>
