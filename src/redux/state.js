@@ -1,7 +1,10 @@
+import messagesPageReducer from "./messagesPageReducer";
+import profilePageReducer from "./profilePageReducer";
+
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const UPDATE_MESSAGE_TEXT = 'UDATE-MESSAGE-TEXT';
-const SEND_MESSAGE = 'SEND-MESSAGE'
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let store = {
     _state: {
@@ -28,7 +31,7 @@ let store = {
                 {text: "Nixao!", id: 4},
                 {text: "Darova", id: 5},
             ],
-            newMessageText: '',
+            newMessageText: ''
         },
         navbarPage: {
             friends: [
@@ -67,33 +70,9 @@ let store = {
 
     dispatch(action) {
         // для newPost
-        if (action.type === ADD_NEW_POST) {
-            let newPost = {
-                message: this._state.profilePage.newPostText,
-                id: this._state.profilePage.posts.length + 1
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ""
-            this.renderIntireTree(this._state);
-        }
-        else if (action.type === UPDATE_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this.renderIntireTree(this._state);
-        }
-        else if (action.type === UPDATE_MESSAGE_TEXT) {
-            this._state.messagesPage.newMessageText = action.text;
-            console.log(this._state.messagesPage.newMessageText)
-            this.renderIntireTree(this._state);
-        }
-        else if  (action.type === SEND_MESSAGE) {
-            let message =  {
-                text: this._state.messagesPage.newMessageText ,
-                id: this._state.messagesPage.messages.length + 1,
-            };
-            this._state.messagesPage.messages.push(message);
-            this._state.messagesPage.newMessageText = '';
-            this.renderIntireTree(this._state);
-        }
+        this._state.profilePage = profilePageReducer (this._state.profilePage, action);
+        this._state.messagesPage = messagesPageReducer (store._state.messagesPage, action);
+        this.renderIntireTree(this._state)
     }
 };
 
@@ -107,7 +86,7 @@ export const updatePostTextActionCreator = (text) => {
 };
 
 export const addMessageActionCreator = (message) => {
-    return {type: SEND_MESSAGE, text: message}
+    return {type: SEND_MESSAGE}
 };
 
 export const updateMessageTextActionCreator = (mesasge) => {

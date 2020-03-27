@@ -5,13 +5,11 @@ import MessageItem from "./MessageItem/MessageItem";
 import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/state";
 
 const Dialogs = (props) => {
-
+    debugger;
     let dialogElements =
         props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id}/>));
     let messagesElements =
         props.messages.map((message) => (<MessageItem text={message.text} id={message.id}/>));
-
-    const textMailRef = React.createRef();
 
     let updateMessageText = (e) => {
         let message = e.target.value;
@@ -19,10 +17,8 @@ const Dialogs = (props) => {
     };
 
     let addMessage = (e) => {
-        let message = e.target.value;
-        props.dispatch(addMessageActionCreator(message));
-
-    }
+        props.dispatch(addMessageActionCreator());
+    };
 
     return (
         <div className={s.dialogs}>
@@ -33,7 +29,7 @@ const Dialogs = (props) => {
                 {messagesElements}
             </div>
             <div>
-                <textarea  onChange={updateMessageText}></textarea> <br></br>
+                <textarea value={props.newMessageText} onChange={updateMessageText}></textarea> <br></br>
                 <button onClick={addMessage}>Отправить</button>
             </div>
         </div>
