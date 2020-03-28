@@ -1,5 +1,6 @@
 import messagesPageReducer from "./messagesPageReducer";
 import profilePageReducer from "./profilePageReducer";
+import navbarPageReducer from "./navbarPageReducer";
 
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
@@ -72,6 +73,7 @@ let store = {
         // для newPost
         this._state.profilePage = profilePageReducer (this._state.profilePage, action);
         this._state.messagesPage = messagesPageReducer (store._state.messagesPage, action);
+        this._state.navbarPage = navbarPageReducer(this._state.navbarPage, action);
         this.renderIntireTree(this._state)
     }
 };

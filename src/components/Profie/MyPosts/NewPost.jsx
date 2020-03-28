@@ -1,17 +1,16 @@
 import React from "react";
-import {addPostActionCreator,updatePostTextActionCreator} from '../../../redux/state'
 
 
 const NewPost = (props) => {
 
     const textAreaRef = React.createRef();
     let addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     };
 
     let onTextAreaChange = () => {
         let text = textAreaRef.current.value;
-        props.dispatch(updatePostTextActionCreator(text));
+        props.onTextAreaChange(text)
     };
 
     return (
@@ -25,6 +24,6 @@ const NewPost = (props) => {
             </div>
         </div>
     )
-}
+};
 
 export default NewPost

@@ -13,6 +13,13 @@
       <executable />
     </execution>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -30,11 +37,12 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Proba_pera_2.0\barbershop\todo\src\redux" />
+      <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Test\react-apps\todo\src\redux" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -88,6 +96,7 @@
       <workItem from="1585115492193" duration="8853000" />
       <workItem from="1585215398234" duration="5642000" />
       <workItem from="1585288240919" duration="9561000" />
+      <workItem from="1585383470432" duration="10726000" />
     </task>
     <servers />
   </component>
