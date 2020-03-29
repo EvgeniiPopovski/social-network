@@ -19,7 +19,6 @@ const initialState = {
 };
 
 const messagesPageReducer = (state = initialState, action) => {
-    debugger;
     switch (action.type) {
         case UPDATE_MESSAGE_TEXT:
             state.newMessageText = action.text;

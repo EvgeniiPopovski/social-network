@@ -14,17 +14,25 @@ const initialState =  {
 
 const profilePageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_NEW_POST:
+        case ADD_NEW_POST: {
+            debugger;
             let newPost = {
                 message: state.newPostText,
                 id: state.posts.length + 1
             };
-            state.posts.push(newPost);
-            state.newPostText = "";
-            return state;
-        case UPDATE_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            // сщхдаем копию State, т.к. нельзя менять приходящий State
+            let stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
+            stateCopy.posts.push(newPost);
+            stateCopy.newPostText = "";
+            console.log(stateCopy)
+            return stateCopy;
+        }
+        case UPDATE_POST_TEXT: {
+            let stateCopy = {...state};
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
         default:
             return state;
     }

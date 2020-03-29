@@ -5,7 +5,7 @@ import MessageItem from "./MessageItem/MessageItem";
 
 
 const Dialogs = (props) => {
-
+    debugger;
     let dialogElements =
         props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id}/>));
     let messagesElements =

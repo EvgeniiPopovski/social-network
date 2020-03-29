@@ -1,19 +1,23 @@
 import React from "react";
 import {addPostActionCreator,updatePostTextActionCreator} from '../../../redux/store'
 import NewPost from "./NewPost";
+import {connect} from "react-redux";
 
 
-const NewPostContainer = (props) => {
-
-    let addPostContainer = () => {
-        props.dispatch(addPostActionCreator())
-    };
-
-    let onTextAreaChangeContainer = (text) => {
-        props.dispatch(updatePostTextActionCreator(text));
-    };
-
-    return <NewPost addPost={addPostContainer} onTextAreaChange={onTextAreaChangeContainer} newPostText={props.newPostText}/>
+let mapStateToProps = (state) => {
+    debugger;
+    return {
+        newPostText: state.profilePage.newPostText,
+    }
 };
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => {dispatch(addPostActionCreator())},
+        onTextAreaChange: (text) => {dispatch(updatePostTextActionCreator(text))}
+    }
+}
+
+const NewPostContainer = connect(mapStateToProps, mapDispatchToProps) (NewPost)
 
 export default NewPostContainer;
