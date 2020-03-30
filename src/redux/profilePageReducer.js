@@ -15,7 +15,6 @@ const initialState =  {
 const profilePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEW_POST: {
-            debugger;
             let newPost = {
                 message: state.newPostText,
                 id: state.posts.length + 1

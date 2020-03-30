@@ -12,7 +12,7 @@ let mapStateToProps = (state) => {
     }
 };
 
-let mapStateToDispatch = (dispatch) => {
+let mapDispatchToProps = (dispatch) => {
     return {
         addMessage: () => {dispatch(addMessageActionCreator())},
         updateMessageText: (message) => {dispatch(updateMessageTextActionCreator(message))} ,
@@ -20,7 +20,7 @@ let mapStateToDispatch = (dispatch) => {
 };
 
 
-const DialogsContainer = connect (mapStateToProps, mapStateToDispatch ) (Dialogs);
+const DialogsContainer = connect (mapStateToProps, mapDispatchToProps ) (Dialogs);
 
 
 

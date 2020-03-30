@@ -10,11 +10,10 @@ import Settings from './components/Settings/Settings.jsx'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
- debugger;
   return (
       <div className='app-wrapper'>
         <Header/>
-        <Navbar friends={props.state.navbarPage.friends}/>
+        <Navbar friends={props.store.getState().navbarPage.friends}/>
         <div className="app-content">
           <Route path='/dialogs' render={() => (
               <DialogsContainer store={props.store}/>)}/>
