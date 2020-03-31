@@ -24,6 +24,9 @@ const Navbar = (props) => {
             <div className={s.item}>
                 <NavLink exact to="/settings" activeClassName={s.active}>Settings</NavLink>
             </div>
+            <div className={s.item}>
+                <NavLink exact to="/users" activeClassName={s.active}>Users</NavLink>
+            </div>
 
             <div className={s.friendListPreview}>
                 <p> Friends </p>
