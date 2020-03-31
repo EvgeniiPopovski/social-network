@@ -41,4 +41,5 @@ const messagesPageReducer = (state = initialState, action) => {
 
     }
 };
+
 export default messagesPageReducer
