@@ -2,21 +2,23 @@ const FOLLOW= 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET USERS';
 
+
 const InitialState = {
     users: [
-        {id: 1, isfollowing: false,fullname: 'Петров Иван',status: 'boss', location:{country: 'Belarus', city: 'Minsk'}},
-        {id: 2,isfollowing: true, fullname: 'Игонь Андреев',status: 'bigboss',location:{country: 'Russias', city: 'Orel'}},
-        {id: 3, isfollowing: false,fullname: 'Жанна Агузарова', status: 'very big boss',location:{country: 'Russias', city: 'Orel'}},
+        {id: 1, avatarUrl: 'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png', isfollowing: false,fullname: 'Петров Иван',status: 'boss', location:{country: 'Belarus', city: 'Minsk'}},
+        {id: 2, avatarUrl: 'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png', isfollowing: true, fullname: 'Игонь Андреев',status: 'bigboss',location:{country: 'Russias', city: 'Orel'}},
+        {id: 3, avatarUrl: 'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png', isfollowing: false,fullname: 'Жанна Агузарова', status: 'very big boss',location:{country: 'Russias', city: 'Orel'}},
     ]
 };
 
 const userReduser= (state = InitialState, action) => {
+    debugger;
     switch (action.type) {
         case FOLLOW : {
             let stateCopy = {
                 ...state,
                 users: state.users.map(u => {
-                    if (u.id === action.id) {
+                    if (u.id === action.userId) {
                         return {...u, isfollowing: true};
                     }
                     return u
@@ -28,8 +30,8 @@ const userReduser= (state = InitialState, action) => {
             let stateCopy = {
                 ...state,
                 users: state.users.map(u => {
-                    if (u.id === action.id) {
-                        return {...u, isfollowing: true};
+                    if (u.id === action.userId) {
+                        return {...u, isfollowing: false};
                     }
                     return u
                 })
@@ -37,10 +39,10 @@ const userReduser= (state = InitialState, action) => {
             return stateCopy;
         };
         case SET_USERS :
-            let stateCopy = {...state, users: [...state.users, ...action.users]}
+            let stateCopy = {...state, users: [...state.users, ...action.users]};
+            return stateCopy;
         default: return state
     }
-    return state;
 }
 
 export const followAC = (userId) => {
