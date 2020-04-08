@@ -37,12 +37,15 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Proba_pera_2.0\barbershop\todo\src\redux" />
-      <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Test\react-apps\todo\src\redux" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Test\react-apps\todo\src\img" />
+      <recent name="D:\Test\react-apps\todo\src\components\Users" />
+      <recent name="D:\Test\react-apps\todo\src\components" />
+      <recent name="D:\Proba_pera_2.0\barbershop\todo\src\redux" />
+      <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -104,6 +107,7 @@
       <workItem from="1586015364833" duration="3081000" />
       <workItem from="1586167883578" duration="8770000" />
       <workItem from="1586243655609" duration="13038000" />
+      <workItem from="1586326334522" duration="11967000" />
     </task>
     <servers />
   </component>

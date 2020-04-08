@@ -2,7 +2,8 @@ const FOLLOW= 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET USERS';
 const SET_CURRENT_PAGE = 'SET CURRENT PAGE';
-const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT'
+const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT';
+const IS_FETCHING_TOGGLE = 'IS_FETCHING_TOGGLE';
 
 
 const InitialState = {
@@ -12,6 +13,7 @@ const InitialState = {
     usersPerPage: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 };
 
 const userReduser= (state = InitialState, action) => {
@@ -54,6 +56,11 @@ const userReduser= (state = InitialState, action) => {
             let stateCopy = {...state, totalUsersCount: action.totalCount };
             return stateCopy
         }
+        case IS_FETCHING_TOGGLE: {
+            let stateCopy = {...state, isFetching: action.isFetching};
+            return stateCopy
+        }
+
         default: return state
     }
 }
@@ -75,6 +82,10 @@ export const setCurrentPageAC = (page) => {
 
 export const setTotalUsersCountAC = (totalCount) => {
     return {type: TOTAL_USERS_COUNT, totalCount}
+}
+
+export const isFetchingToggleAC = (isFetching) => {
+    return {type: IS_FETCHING_TOGGLE, isFetching: isFetching}
 }
 
 
