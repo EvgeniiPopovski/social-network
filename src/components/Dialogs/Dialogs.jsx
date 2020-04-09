@@ -18,6 +18,9 @@ const Dialogs = (props) => {
 
     let addMessage = () => {
         props.addMessage();
+        if (props.newMessageText == '') {
+            alert ('Невозможно отправить пучтое сообщение! :(')
+        }
     };
 
     return (

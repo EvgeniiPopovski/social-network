@@ -29,8 +29,10 @@ const Navbar = (props) => {
             </div>
 
             <div className={s.friendListPreview}>
-                <p> Friends </p>
-                {friendsListPreviw}
+                <p> Best friends </p>
+                <div className={s.friendsPreviewConteiner}>
+                    {friendsListPreviw}
+                </div>
             </div>
         </nav>
     )

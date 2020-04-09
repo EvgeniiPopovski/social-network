@@ -32,7 +32,9 @@ const messagesPageReducer = (state = initialState, action) => {
             };
             let stateCopy = {...state};
             stateCopy.messages = [...state.messages];
-            stateCopy.messages.push(message);
+            if (stateCopy.newMessageText !== '')
+                {stateCopy.messages.push(message);
+            };
             stateCopy.newMessageText = '';
             return stateCopy;
         }
@@ -40,6 +42,14 @@ const messagesPageReducer = (state = initialState, action) => {
             return state;
 
     }
+};
+
+export const addMessageActionCreator = (message) => {
+    return {type: SEND_MESSAGE}
+};
+
+export const updateMessageTextActionCreator = (mesasge) => {
+    return {type:UPDATE_MESSAGE_TEXT, text: mesasge }
 };
 
 export default messagesPageReducer

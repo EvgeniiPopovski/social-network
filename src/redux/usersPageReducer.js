@@ -86,7 +86,8 @@ export const setTotalUsersCountAC = (totalCount) => {
 
 export const isFetchingToggleAC = (isFetching) => {
     return {type: IS_FETCHING_TOGGLE, isFetching: isFetching}
-}
+};
+
 
 
 export default userReduser;

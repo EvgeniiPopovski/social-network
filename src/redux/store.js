@@ -93,6 +93,6 @@ export const addMessageActionCreator = (message) => {
 
 export const updateMessageTextActionCreator = (mesasge) => {
     return {type:UPDATE_MESSAGE_TEXT, text: mesasge }
-}
+};
 
 export default store;

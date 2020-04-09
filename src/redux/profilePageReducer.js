@@ -1,5 +1,6 @@
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 // в старом State Ээто ProfilePage
 const initialState =  {
@@ -10,6 +11,7 @@ const initialState =  {
         {message: 'First Post', id: 4}
     ],
         newPostText: '',
+    profile: null,
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -22,9 +24,10 @@ const profilePageReducer = (state = initialState, action) => {
             // сщхдаем копию State, т.к. нельзя менять приходящий State
             let stateCopy = {...state};
             stateCopy.posts = [...state.posts];
-            stateCopy.posts.push(newPost);
+            if (stateCopy.newPostText !== ''){
+                stateCopy.posts.push(newPost);
+            }
             stateCopy.newPostText = "";
-            console.log(stateCopy)
             return stateCopy;
         }
         case UPDATE_POST_TEXT: {
@@ -32,9 +35,26 @@ const profilePageReducer = (state = initialState, action) => {
             stateCopy.newPostText = action.newText;
             return stateCopy;
         }
+        case SET_USER_PROFILE: {
+            let stateCopy = {...state, profile: action.profile};
+            return stateCopy;
+        }
         default:
             return state;
     }
-}
+};
+
+
+export const addPostActionCreator = () => {
+    return {type: ADD_NEW_POST }
+};
+
+export const updatePostTextActionCreator = (text) => {
+    return {type: UPDATE_POST_TEXT, newText: text}
+};
+
+export const setUserProfileAC = (profile) => {
+    return {type: SET_USER_PROFILE, profile }
+};
 
 export default profilePageReducer

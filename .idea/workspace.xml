@@ -28,7 +28,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/redux" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Profie" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -37,15 +37,16 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Test\react-apps\todo\src\redux" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Test\react-apps\todo\src\img" />
       <recent name="D:\Test\react-apps\todo\src\components\Users" />
       <recent name="D:\Test\react-apps\todo\src\components" />
       <recent name="D:\Proba_pera_2.0\barbershop\todo\src\redux" />
       <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Test\react-apps\todo\src\components\Profie" />
+      <recent name="D:\Test\react-apps\todo\src\redux" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -108,6 +109,7 @@
       <workItem from="1586167883578" duration="8770000" />
       <workItem from="1586243655609" duration="13038000" />
       <workItem from="1586326334522" duration="11967000" />
+      <workItem from="1586423916819" duration="9153000" />
     </task>
     <servers />
   </component>

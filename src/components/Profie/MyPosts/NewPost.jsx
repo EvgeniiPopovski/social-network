@@ -2,10 +2,12 @@ import React from "react";
 
 
 const NewPost = (props) => {
-
     const textAreaRef = React.createRef();
     let addPost = () => {
-        props.addPost()
+        props.addPost();
+        if(textAreaRef.current.value == '') {
+            alert ('Нельзя опубликовать пустой пост')
+        }
     };
 
     let onTextAreaChange = () => {
@@ -17,7 +19,7 @@ const NewPost = (props) => {
         <div>
             <h3> My posts </h3>
             <div>
-                <textarea ref={textAreaRef} value={props.newPostText} onChange={onTextAreaChange}/>
+                <textarea  ref={textAreaRef} value={props.newPostText} onChange={onTextAreaChange}/>
             </div>
             <div>
                 <button onClick={addPost}>Отправить</button>
