@@ -9,8 +9,10 @@
 }
 .wrapper {
     display: flex;
+    flex-direction: column;
     padding: 15px;
     border: 1px solid white;
+
 
 }
 .avatar {
@@ -21,7 +23,7 @@
     vertical-align: middle;
     text-align: center;
 }
-.description {
+.aboutUser {
     color: white;
     font-size: 16pt;
     font-style: italic;

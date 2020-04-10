@@ -9,33 +9,28 @@ import {setUserProfileAC} from "../../redux/profilePageReducer";
 
 class ProfileContainer extends React.Component{
     componentDidMount() {
-        debugger;
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((response) => {
             this.props.setUserProfile(response.data);
         });
     }
 
     render () {
+        debugger;
         return (
             <div>
-                <ProfileInfo profile={this.props} />
+                <ProfileInfo profile={this.props.profile} />
                 <MyPostsContainer {...this.props} />
             </div>
         )
     }
 }
 
-let mapStateToProps = () => {
-    return ({
-
-    })
-};
-
-let mapDisPatchToProps = (state) => {
+let mapStateToProps = (state) => {
     return ({
         profile: state.profilePage.profile,
     })
 };
+
 
 let mapDispatchToProps = (dispatch) => {
     return ({
