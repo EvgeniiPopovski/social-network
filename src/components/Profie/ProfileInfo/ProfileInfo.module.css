@@ -16,12 +16,8 @@
 
 }
 .avatar {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    background-color: antiquewhite;
-    vertical-align: middle;
-    text-align: center;
+
+
 }
 .aboutUser {
     color: white;

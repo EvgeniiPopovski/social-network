@@ -5,7 +5,7 @@ import NewPostContainer from "./NewPostContainer";
 
 
 const MyPosts = (props) => {
-    let postItem = props.posts.map((postItem)=>(<Post message={postItem.message} id={postItem.id} />))
+    let postItem = props.posts.map((postItem)=>(<Post message={postItem.message} id={postItem.id} profile={props.profile}/>))
     return (
         <div className={s.posts}>
             <NewPostContainer newPostText={props.newPostText} dispatch={props.store.dispatch}/>
