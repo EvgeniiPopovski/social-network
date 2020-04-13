@@ -5,5 +5,8 @@
 
 .header img {
     width: 50px;
-
+}
+.authMe {
+    float: right;
+    color: white;
 }

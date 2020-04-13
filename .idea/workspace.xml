@@ -37,16 +37,16 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Test\react-apps\todo\src\components\Profie" />
+      <recent name="D:\Test\react-apps\todo\src\redux" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Test\react-apps\todo\src\img" />
       <recent name="D:\Test\react-apps\todo\src\components\Users" />
       <recent name="D:\Test\react-apps\todo\src\components" />
       <recent name="D:\Proba_pera_2.0\barbershop\todo\src\redux" />
       <recent name="D:\Proba_pera_2.0\barbershop\todo\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Test\react-apps\todo\src\components\Profie" />
-      <recent name="D:\Test\react-apps\todo\src\redux" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -112,6 +112,7 @@
       <workItem from="1586423916819" duration="9153000" />
       <workItem from="1586513155127" duration="7554000" />
       <workItem from="1586680058192" duration="5454000" />
+      <workItem from="1586756316580" duration="12520000" />
     </task>
     <servers />
   </component>

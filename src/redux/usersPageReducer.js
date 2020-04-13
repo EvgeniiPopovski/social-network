@@ -4,6 +4,7 @@ const SET_USERS = 'SET USERS';
 const SET_CURRENT_PAGE = 'SET CURRENT PAGE';
 const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT';
 const IS_FETCHING_TOGGLE = 'IS_FETCHING_TOGGLE';
+const TOGGLE_IS_FOLLOWING_INPROGRES = 'TOGGLE_IS_FOLLOWING_INPROGRES'
 
 
 const InitialState = {
@@ -14,6 +15,7 @@ const InitialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: false,
 };
 
 const userReduser= (state = InitialState, action) => {
@@ -52,7 +54,6 @@ const userReduser= (state = InitialState, action) => {
             return stateCopy;
         }
         case TOTAL_USERS_COUNT: {
-            debugger
             let stateCopy = {...state, totalUsersCount: action.totalCount };
             return stateCopy
         }
@@ -87,6 +88,10 @@ export const setTotalUsersCountAC = (totalCount) => {
 export const isFetchingToggleAC = (isFetching) => {
     return {type: IS_FETCHING_TOGGLE, isFetching: isFetching}
 };
+
+export const toggleIsFollowing = (isFetching) => {
+    return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFetching: isFetching}
+}
 
 
 

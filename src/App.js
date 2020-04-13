@@ -9,11 +9,12 @@ import Settings from './components/Settings/Settings.jsx'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profie/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderLogin/HeaderContainer";
 
 const App = (props) => {
   return (
       <div className='app-wrapper'>
-        <Header/>
+        <HeaderContainer/>
         <Navbar friends={props.store.getState().navbarPage.friends}/>
         <div className="app-content">
           <Route path='/dialogs' render={() => (
