@@ -11,12 +11,14 @@ const InitialState = {
     users:[],
     // Значение usersPerPage хардкодиться вручную, totalUsersCount приходит к нам с сервера
     // в качестве ответа на наш Get запрос всех Юзеров
-    usersPerPage: 5,
+    usersPerPage: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false,
+    isFollowingInProgress: false,
 };
+
+//usersPage
 
 const userReduser= (state = InitialState, action) => {
 
@@ -26,7 +28,7 @@ const userReduser= (state = InitialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, isfollowing: true};
+                        return {...u, followed: true};
                     }
                     return u
                 })
@@ -38,7 +40,7 @@ const userReduser= (state = InitialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, isfollowing: false};
+                        return {...u, followed: false};
                     }
                     return u
                 })
@@ -61,7 +63,11 @@ const userReduser= (state = InitialState, action) => {
             let stateCopy = {...state, isFetching: action.isFetching};
             return stateCopy
         }
-
+        case TOGGLE_IS_FOLLOWING_INPROGRES: {
+            debugger;
+            let stateCopy = {...state, isFollowingInProgress: action.isFollowing};
+            return stateCopy
+        }
         default: return state
     }
 }
@@ -89,8 +95,8 @@ export const isFetchingToggleAC = (isFetching) => {
     return {type: IS_FETCHING_TOGGLE, isFetching: isFetching}
 };
 
-export const toggleIsFollowing = (isFetching) => {
-    return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFetching: isFetching}
+export const toggleFollowingInProgressAC = (followingPropgress) => {
+    return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFollowing: followingPropgress}
 }
 
 

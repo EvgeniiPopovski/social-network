@@ -5,13 +5,13 @@ import {
     isFetchingToggleAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleFollowingInProgressAC,
     unfollowAC
 } from "../../redux/usersPageReducer";
-import * as axios from "axios";
 import Users from "./Users";
 import s from './Users.module.css'
 import Preloader from "../common/Preloader";
+import {getUsers} from "../../API/API";
 
 
 class UsersAPIComponent extends React.Component {
@@ -19,22 +19,25 @@ class UsersAPIComponent extends React.Component {
         super(props);
     }
     componentDidMount() {
+        console.log(this.props)
         this.props.isFetchingToggle(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersPerPage}`, {withCredentials: true}).then((response) => {
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
+        getUsers(this.props.currentPage , this.props.usersPerPage)
+        .then((data) => {
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
             this.props.isFetchingToggle(false);
         });
     }
     onPageChange = (page) => {
         this.props.setCurrentPage(page);
         this.props.isFetchingToggle(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersPerPage}`, {withCredentials: true}).then((response) => {
-            this.props.setUsers(response.data.items);
+        getUsers(page , this.props.usersPerPage).then((data) => {
+            this.props.setUsers(data.items);
             this.props.isFetchingToggle(false);
         })
     };
     render() {
+        console.log (this.props)
         return (<div className={s.usersContainer}>
             {this.props.isFetching ? <Preloader/> : null }
                 <Users totalUsersCount={this.props.totalUsersCount}
@@ -45,6 +48,8 @@ class UsersAPIComponent extends React.Component {
                        follow={this.props.follow}
                        onPageChange={this.onPageChange}
                        isFetching={this.props.isFetching}
+                       isFollowingInProgress={this.props.isFollowingInProgress}
+                       toggleFollowingProgress={this.props.toggleFollowingProgress}
                 />
             </div>
         );
@@ -57,7 +62,8 @@ const mapStateToProps = (state) => {
         usersPerPage: state.usersPage.usersPerPage,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        isFollowingInProgress: state.usersPage.isFollowingInProgress
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -67,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
         setUsers: (users) => {dispatch(setUsersAC(users))},
         setCurrentPage: (page) => {dispatch(setCurrentPageAC(page))},
         setTotalUsersCount: (totalCount) => {dispatch(setTotalUsersCountAC(totalCount))},
-        isFetchingToggle: (isFetching) => {dispatch(isFetchingToggleAC(isFetching))}
+        isFetchingToggle: (isFetching) => {dispatch(isFetchingToggleAC(isFetching))},
+        toggleFollowingProgress: (followingPropgress) => {dispatch(toggleFollowingInProgressAC(followingPropgress))}
 
     };
 };
