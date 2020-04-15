@@ -15,7 +15,7 @@ const InitialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    isFollowingInProgress: false,
+    isFollowingInProgress: [],
 };
 
 //usersPage
@@ -65,7 +65,10 @@ const userReduser= (state = InitialState, action) => {
         }
         case TOGGLE_IS_FOLLOWING_INPROGRES: {
             debugger;
-            let stateCopy = {...state, isFollowingInProgress: action.isFollowing};
+            let stateCopy = {...state,
+                isFollowingInProgress: action.isFollowing
+                    ? [...state.isFollowingInProgress, action.userId]
+                    : state.isFollowingInProgress.filter(id => id != action.userId)};
             return stateCopy
         }
         default: return state
@@ -95,8 +98,8 @@ export const isFetchingToggleAC = (isFetching) => {
     return {type: IS_FETCHING_TOGGLE, isFetching: isFetching}
 };
 
-export const toggleFollowingInProgressAC = (followingPropgress) => {
-    return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFollowing: followingPropgress}
+export const toggleFollowingInProgressAC = (followingPropgress, userId) => {
+    return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFollowing: followingPropgress, userId: userId }
 }
 
 

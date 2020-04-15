@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentPage: (page) => {dispatch(setCurrentPageAC(page))},
         setTotalUsersCount: (totalCount) => {dispatch(setTotalUsersCountAC(totalCount))},
         isFetchingToggle: (isFetching) => {dispatch(isFetchingToggleAC(isFetching))},
-        toggleFollowingProgress: (followingPropgress) => {dispatch(toggleFollowingInProgressAC(followingPropgress))}
+        toggleFollowingProgress: (followingPropgress, userId) => {dispatch(toggleFollowingInProgressAC(followingPropgress, userId))}
 
     };
 };

@@ -36,6 +36,10 @@
     font-weight: 600;
     text-decoration: underline;
 }
+.followButton:disabled{
+    opacity: 0.5;
+}
+
 .selectedPage {
     text-decoration: underline;
     font-weight: bold;

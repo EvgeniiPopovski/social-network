@@ -27,30 +27,30 @@ debugger;
                             </NavLink>
 
                             <div>
-                                {u.followed ? <button  disabled={props.isFollowingInProgress} className={s.followButton}
+                                {u.followed ? <button  disabled={props.isFollowingInProgress.some( id => id == u.id)} className={s.followButton}
                                                       onClick={() => {
-                                                          props.toggleFollowingProgress(true)
+                                                          props.toggleFollowingProgress(true , u.id)
                                                           unfollowUser(u.id)
                                                               .then(data => {
                                                                   if (data.resultCode == 0) {
                                                                       props.unfollow(u.id)
                                                                   }
-                                                                  props.toggleFollowingProgress(false)
+                                                                  props.toggleFollowingProgress(false , u.id)
                                                               })
 
 
                                                       }
                                                       }>Unfollow</button>
 
-                                    : <button disabled={props.isFollowingInProgress} className={s.followButton}
+                                    : <button disabled={props.isFollowingInProgress.some( id => id == u.id)} className={s.followButton}
                                               onClick={() => {
-                                                  props.toggleFollowingProgress(true)
+                                                  props.toggleFollowingProgress(true , u.id)
                                                       followUser(u.id)
                                                       .then(data => {
                                                           if (data.resultCode == 0) {
                                                               props.follow(u.id)
                                                           }
-                                                          props.toggleFollowingProgress(false)
+                                                          props.toggleFollowingProgress(false , u.id)
                                                       })
 
                                               }
