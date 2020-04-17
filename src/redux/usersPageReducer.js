@@ -1,3 +1,5 @@
+import {followUser, getUsers, unfollowUser} from "../API/API";
+
 const FOLLOW= 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET USERS';
@@ -102,6 +104,44 @@ export const toggleFollowingInProgressAC = (followingPropgress, userId) => {
     return {type: TOGGLE_IS_FOLLOWING_INPROGRES, isFollowing: followingPropgress, userId: userId }
 }
 
+export const getUsersThunkCreator = (currentPage, usersPerPage)=> {
+    return (dispatch) => {
+        dispatch(isFetchingToggleAC(true));
+        getUsers(currentPage, usersPerPage)
+            .then((data) => {
+                dispatch(setUsersAC(data.items));
+                dispatch(setTotalUsersCountAC(data.totalCount));
+                dispatch(isFetchingToggleAC(false));
+            });
+    }
+}
 
+export const unFollowUserThunkCreator = (userId) => {
+    return (dispatch) => {
+    debugger;
+        dispatch(toggleFollowingInProgressAC(true, userId))
+        unfollowUser(userId)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(unfollowAC(userId))
+                }
+                dispatch(toggleFollowingInProgressAC(false, userId))
+            })
+    }
+};
+
+export const followUserThunkCreator = (userId) => {
+    return (dispatch) => {
+    debugger;
+        dispatch(toggleFollowingInProgressAC(true, userId))
+        followUser(userId)
+            .then(data => {
+                if (data.resultCode == 0) {
+                    dispatch(followAC(userId))
+                }
+                dispatch(toggleFollowingInProgressAC(false, userId))
+            })
+    }
+}
 
 export default userReduser;
