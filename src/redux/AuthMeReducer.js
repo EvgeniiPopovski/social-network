@@ -1,3 +1,5 @@
+import {authApi} from "../API/API";
+
 const SET_AUTHME = "SET_AUTHME"
 
 const initialState = {
@@ -20,5 +22,16 @@ const  AuthMeReducer = (state = initialState,action) => {
 export const setAuthME = (action) => {
     return {type: SET_AUTHME, id: action.data.id, login: action.data.login, email: action.data.email}
 };
+
+export const getAuthMeThunkCreator = () => {
+    return (dispatch) => {
+        authApi()
+            .then((response) => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setAuthME(response.data))
+                }
+            })
+    }
+}
 
 export default AuthMeReducer;

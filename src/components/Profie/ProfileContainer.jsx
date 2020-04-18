@@ -1,10 +1,10 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfileAC} from "../../redux/profilePageReducer";
-import {withRouter} from "react-router-dom";
+import {setUserProfileAC, setUserProfileThunkCreator} from "../../redux/profilePageReducer";
+import {Redirect, withRouter} from "react-router-dom";
+
 
 
 class ProfileContainer extends React.Component{
@@ -13,11 +13,10 @@ class ProfileContainer extends React.Component{
         if (!userId) {
             userId = 2
         };
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId).then((response) => {
-            this.props.setUserProfile(response.data);
-        });
+        this.props.setUserProfile(userId);
     }
     render () {
+        if (!this.props.isLogged) {return <Redirect to={"/login"}/>}
         return (
             <div>
                 <ProfileInfo profile={this.props.profile} />
@@ -30,13 +29,15 @@ class ProfileContainer extends React.Component{
 let mapStateToProps = (state) => {
     return ({
         profile: state.profilePage.profile,
+        isLogged: state.AuthMe.isLogged
     })
 };
 
 
 let mapDispatchToProps = (dispatch) => {
     return ({
-        setUserProfile: (profile) => {dispatch(setUserProfileAC(profile))}
+        setUserProfile: (userId) => {dispatch(setUserProfileThunkCreator(userId))}
+
     })
 };
 

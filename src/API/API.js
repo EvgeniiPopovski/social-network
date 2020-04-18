@@ -20,3 +20,12 @@ export let followUser = (userId) => {
     })
         .then(response => response.data)
 };
+
+export let setUserProfileAPI = (userId) => {
+    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+        .then(response => response.data)
+};
+
+export const authApi = () => {
+    return axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
+}

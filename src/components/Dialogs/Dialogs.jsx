@@ -2,10 +2,10 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import {Redirect} from "react-router-dom";
 
 
 const Dialogs = (props) => {
-    debugger;
     let dialogElements =
         props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id}/>));
     let messagesElements =
@@ -22,6 +22,8 @@ const Dialogs = (props) => {
             alert ('Невозможно отправить пучтое сообщение! :(')
         }
     };
+
+    if (props.isLogged == false) {return <Redirect to={'/login'}/>}
 
     return (
         <div className={s.dialogs}>
