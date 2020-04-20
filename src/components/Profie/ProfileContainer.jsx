@@ -4,6 +4,8 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {connect} from "react-redux";
 import {setUserProfileAC, setUserProfileThunkCreator} from "../../redux/profilePageReducer";
 import {Redirect, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -16,7 +18,6 @@ class ProfileContainer extends React.Component{
         this.props.setUserProfile(userId);
     }
     render () {
-        if (!this.props.isLogged) {return <Redirect to={"/login"}/>}
         return (
             <div>
                 <ProfileInfo profile={this.props.profile} />
@@ -29,7 +30,7 @@ class ProfileContainer extends React.Component{
 let mapStateToProps = (state) => {
     return ({
         profile: state.profilePage.profile,
-        isLogged: state.AuthMe.isLogged
+
     })
 };
 
@@ -37,10 +38,12 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return ({
         setUserProfile: (userId) => {dispatch(setUserProfileThunkCreator(userId))}
-
     })
 };
 
-let WithRoutProfileContainer = withRouter (ProfileContainer)
+export default compose (
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    withAuthRedirect
+) (ProfileContainer)
 
-export default connect(mapStateToProps, mapDispatchToProps) (WithRoutProfileContainer);

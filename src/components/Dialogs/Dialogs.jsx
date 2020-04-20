@@ -23,7 +23,6 @@ const Dialogs = (props) => {
         }
     };
 
-    if (props.isLogged == false) {return <Redirect to={'/login'}/>}
 
     return (
         <div className={s.dialogs}>
