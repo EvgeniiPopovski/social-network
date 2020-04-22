@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     let answerToggle = "";
@@ -16,6 +17,7 @@ const ProfileInfo = (props) => {
                 <img className={s.walper}
                      src='https://avatars.mds.yandex.net/get-pdb/921693/bb741f14-fd0f-45c7-950d-04767ead1825/s1200'/>
             </div>
+            <ProfileStatus status={'Hello my friend'}/>
             <div className={s.wrapper}>
                 <div className={s.avatar}>
                     {props.profile !== null ? <img src={props.profile.photos.large}/> : null}
