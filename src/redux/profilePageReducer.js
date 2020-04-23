@@ -1,8 +1,9 @@
-import {setUserProfileAPI} from "../API/API";
+import {profileAPI} from "../API/API";
 
 const ADD_NEW_POST = 'ADD-NEW-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = "STE_STATUS"
 
 // в старом State Ээто ProfilePage
 const initialState =  {
@@ -14,6 +15,7 @@ const initialState =  {
     ],
         newPostText: '',
     profile: null,
+    status : "",
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -41,6 +43,12 @@ const profilePageReducer = (state = initialState, action) => {
             let stateCopy = {...state, profile: action.profile};
             return stateCopy;
         }
+        case SET_STATUS :
+            return {
+                ...state,
+                status: action.status
+            }
+
         default:
             return state;
     }
@@ -55,18 +63,40 @@ export const updatePostTextActionCreator = (text) => {
     return {type: UPDATE_POST_TEXT, newText: text}
 };
 
+export const setStatusAC = (status) => {
+    return {type: SET_STATUS , status: status}
+}
+
 export const setUserProfileAC = (profile) => {
     return {type: SET_USER_PROFILE, profile }
 };
 
 export const setUserProfileThunkCreator = (userId) => {
     return (dispatch) => {
-        setUserProfileAPI(userId)
+        profileAPI.setUserProfileAPI(userId)
             .then((data) => {
                 dispatch(setUserProfileAC(data));
             });
     }
-}
+};
+export const getStatusThunkCreator = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+        .then((response) =>
+            dispatch(setStatusAC(response.data)))
+    }
+};
 
+export const updateStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then((response) => {
+                    if (response.data.resultCode === 0) {
+                        dispatch(setStatusAC(status))
+                    }
+                }
+            )
+    }
+};
 
 export default profilePageReducer

@@ -1,4 +1,4 @@
-import {authApi} from "../API/API";
+import {authAPI} from "../API/API";
 
 const SET_AUTHME = "SET_AUTHME"
 
@@ -25,7 +25,7 @@ export const setAuthME = (action) => {
 
 export const getAuthMeThunkCreator = () => {
     return (dispatch) => {
-        authApi()
+        authAPI.getAuth()
             .then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(setAuthME(response.data))

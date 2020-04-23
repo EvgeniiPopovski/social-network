@@ -11,13 +11,14 @@ const ProfileInfo = (props) => {
             answerToggle = "НЕТ! "
         }
     }
+
     return (
         <div>
             <div className={s.wrapWalper}>
                 <img className={s.walper}
                      src='https://avatars.mds.yandex.net/get-pdb/921693/bb741f14-fd0f-45c7-950d-04767ead1825/s1200'/>
             </div>
-            <ProfileStatus status={'Hello my friend'}/>
+            <ProfileStatus status={props.status}  updateStatus = {props.updateStatus}/>
             <div className={s.wrapper}>
                 <div className={s.avatar}>
                     {props.profile !== null ? <img src={props.profile.photos.large}/> : null}

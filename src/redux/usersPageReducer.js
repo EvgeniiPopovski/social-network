@@ -1,4 +1,4 @@
-import {followUser, getUsers, unfollowUser} from "../API/API";
+import {usersAPI} from "../API/API";
 
 const FOLLOW= 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -107,7 +107,7 @@ export const toggleFollowingInProgressAC = (followingPropgress, userId) => {
 export const getUsersThunkCreator = (currentPage, usersPerPage)=> {
     return (dispatch) => {
         dispatch(isFetchingToggleAC(true));
-        getUsers(currentPage, usersPerPage)
+        usersAPI.getUsers(currentPage, usersPerPage)
             .then((data) => {
                 dispatch(setUsersAC(data.items));
                 dispatch(setTotalUsersCountAC(data.totalCount));
@@ -120,7 +120,7 @@ export const unFollowUserThunkCreator = (userId) => {
     return (dispatch) => {
     debugger;
         dispatch(toggleFollowingInProgressAC(true, userId))
-        unfollowUser(userId)
+        usersAPI.unfollowUser(userId)
             .then(data => {
                 if (data.resultCode == 0) {
                     dispatch(unfollowAC(userId))
@@ -134,7 +134,7 @@ export const followUserThunkCreator = (userId) => {
     return (dispatch) => {
     debugger;
         dispatch(toggleFollowingInProgressAC(true, userId))
-        followUser(userId)
+        usersAPI.followUser(userId)
             .then(data => {
                 if (data.resultCode == 0) {
                     dispatch(followAC(userId))
