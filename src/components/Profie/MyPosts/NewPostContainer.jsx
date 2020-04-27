@@ -12,8 +12,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addPost: () => {dispatch(addPostActionCreator())},
-        onTextAreaChange: (text) => {dispatch(updatePostTextActionCreator(text))}
+        addPost: (postText) => {dispatch(addPostActionCreator(postText))},
     }
 }
 

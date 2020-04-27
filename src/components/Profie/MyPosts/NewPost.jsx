@@ -1,31 +1,42 @@
 import React from "react";
+import { Field, reduxForm,  } from "redux-form";
+import {required, maxLengthCreator} from "./../../../validators/validators"
+import { TextArea } from "../../common/FormControls/FormControls.jsx";
 
+const maxLength100 = maxLengthCreator(100)
 
 const NewPost = (props) => {
-    const textAreaRef = React.createRef();
-    let addPost = () => {
-        props.addPost();
-        if(textAreaRef.current.value == '') {
-            alert ('Нельзя опубликовать пустой пост')
-        }
-    };
-
-    let onTextAreaChange = () => {
-        let text = textAreaRef.current.value;
-        props.onTextAreaChange(text)
-    };
+    
+    let addPost = (postText) => {
+        props.addPost(postText);   
+    }
+    let addPostText = (value) => {
+        addPost(value.newPostText)  
+    }
 
     return (
         <div>
             <h3> My posts </h3>
-            <div>
-                <textarea  ref={textAreaRef} value={props.newPostText} onChange={onTextAreaChange}/>
-            </div>
-            <div>
-                <button onClick={addPost}>Отправить</button>
-            </div>
+           <NewPostReduxForm onSubmit={addPostText}/>
+            
         </div>
     )
 };
 
 export default NewPost
+
+const NewPostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit} >
+            <Field component={TextArea} name='newPostText' placeholder='Введите новый пост' 
+                validate={[required, maxLength100]} />
+            <div>
+                <button>Отправить</button>
+            </div>
+        </form>
+    )
+};
+
+const NewPostReduxForm = reduxForm({
+    form: 'newPostText'
+}) (NewPostForm) 

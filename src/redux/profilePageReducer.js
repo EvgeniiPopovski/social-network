@@ -13,7 +13,6 @@ const initialState =  {
         {message: "Привет, Пятро", id: 3},
         {message: 'First Post', id: 4}
     ],
-        newPostText: '',
     profile: null,
     status : "",
 };
@@ -22,21 +21,12 @@ const profilePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEW_POST: {
             let newPost = {
-                message: state.newPostText,
+                message: action.postText,
                 id: state.posts.length + 1
             };
             // сщхдаем копию State, т.к. нельзя менять приходящий State
             let stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
-            if (stateCopy.newPostText !== ''){
-                stateCopy.posts.push(newPost);
-            }
-            stateCopy.newPostText = "";
-            return stateCopy;
-        }
-        case UPDATE_POST_TEXT: {
-            let stateCopy = {...state};
-            stateCopy.newPostText = action.newText;
+            stateCopy.posts = [...state.posts, newPost];
             return stateCopy;
         }
         case SET_USER_PROFILE: {
@@ -55,14 +45,9 @@ const profilePageReducer = (state = initialState, action) => {
 };
 
 
-export const addPostActionCreator = () => {
-    return {type: ADD_NEW_POST }
+export const addPostActionCreator = (postText) => {
+    return {type: ADD_NEW_POST, postText }
 };
-
-export const updatePostTextActionCreator = (text) => {
-    return {type: UPDATE_POST_TEXT, newText: text}
-};
-
 export const setStatusAC = (status) => {
     return {type: SET_STATUS , status: status}
 }

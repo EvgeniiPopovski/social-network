@@ -15,27 +15,17 @@ const initialState = {
         {text: "Nixao!", id: 4},
         {text: "Darova", id: 5},
     ],
-    newMessageText: ''
 };
 
 const messagesPageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_MESSAGE_TEXT: {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.text;
-            return stateCopy;
-        }
         case SEND_MESSAGE: {
             let message = {
-                text: state.newMessageText,
+                text: action.messageText,
                 id: state.messages.length + 1,
             };
             let stateCopy = {...state};
-            stateCopy.messages = [...state.messages];
-            if (stateCopy.newMessageText !== '')
-                {stateCopy.messages.push(message);
-            };
-            stateCopy.newMessageText = '';
+            stateCopy.messages = [...state.messages, message];
             return stateCopy;
         }
         default:
@@ -44,12 +34,9 @@ const messagesPageReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessageActionCreator = (message) => {
-    return {type: SEND_MESSAGE}
+export const addMessageActionCreator = (messageText) => {
+    return {type: SEND_MESSAGE, messageText: messageText}
 };
 
-export const updateMessageTextActionCreator = (mesasge) => {
-    return {type:UPDATE_MESSAGE_TEXT, text: mesasge }
-};
 
 export default messagesPageReducer
