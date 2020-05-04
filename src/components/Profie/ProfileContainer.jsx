@@ -17,7 +17,7 @@ class ProfileContainer extends React.Component{
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2
+            userId = this.props.isLoggedId
         };
         this.props.setUserProfile(userId);
         this.props.getStatus(userId)
@@ -35,7 +35,9 @@ class ProfileContainer extends React.Component{
 let mapStateToProps = (state) => {
     return ({
         profile: state.profilePage.profile,
-        status : state.profilePage.status
+        status : state.profilePage.status,
+        isLogged : state.AuthMe.isLogged,
+        isLoggedId : state.AuthMe.userId
 
     })
 };
@@ -44,7 +46,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return ({
         setUserProfile: (userId) => {dispatch(setUserProfileThunkCreator(userId))},
-         getStatus : (userId) => {dispatch(getStatusThunkCreator(userId))},
+        getStatus : (userId) => {dispatch(getStatusThunkCreator(userId))},
         updateStatus: (status) => {dispatch(updateStatusThunkCreator(status))}
 
     })

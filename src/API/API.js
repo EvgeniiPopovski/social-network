@@ -37,6 +37,13 @@ export const profileAPI = {
 export const authAPI = {
     getAuth  ()  {
         return axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true})
+    },
+    login (email,password, remeberMe ) {
+        return axios.post('https://social-network.samuraijs.com/api/1.0/auth/login', { email , password , remeberMe},  {withCredentials: true, headers: {'API-KEY': 'd6c82b27-7542-428f-a89c-13e7b9f79f63'}})
+    },
+    logout () {
+        return axios.delete('https://social-network.samuraijs.com/api/1.0/auth/login' , {withCredentials: true, headers: {'API-KEY': 'd6c82b27-7542-428f-a89c-13e7b9f79f63'}} )
     }
+
 }
 

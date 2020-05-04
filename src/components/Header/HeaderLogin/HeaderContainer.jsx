@@ -3,7 +3,7 @@ import * as axios from "axios";
 import {getAuthMeThunkCreator} from "../../../redux/AuthMeReducer";
 import Header from "../Header";
 import {connect} from "react-redux";
-
+import {logoutThunkCreator} from './../../../redux/AuthMeReducer'
 
 
 class HeaderContainer extends React.Component{
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
     return ({
         getAuthME: () => {
             dispatch(getAuthMeThunkCreator())
+        },
+        logout: () => {
+            dispatch(logoutThunkCreator())
         }
     })
 }

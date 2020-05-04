@@ -7,3 +7,8 @@
     font-weight: solid;
     color: red;
 }
+
+.formError {
+    color: red;
+    border: 1px red solid;
+}
