@@ -26,11 +26,11 @@ export const setAuthME = (userId , email , login , isLogged) => {
 
 export const getAuthMeThunkCreator = () => {
     return (dispatch) => {
-        authAPI.getAuth()
+        return authAPI.getAuth()
             .then((response) => {
                 if (response.data.resultCode === 0) {
-                    let { id , login , email } = response.data.data;
-                    dispatch(setAuthME(id , email , login , true))
+                    let { id, login, email } = response.data.data;
+                    dispatch(setAuthME(id, email, login, true))
                 }
             })
     }

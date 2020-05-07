@@ -7,6 +7,7 @@ import {
 import Users from "./Users";
 import s from './Users.module.css'
 import Preloader from "../common/Preloader";
+import { getUsersSuperSelector, getUsersPerPage, getTotalUsersCount, getCurrentPage, getFetching, getIsFollowingInProgress } from "../../redux/usersSelectors";
 
 
 class UsersAPIComponent extends React.Component {
@@ -39,12 +40,12 @@ class UsersAPIComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        usersPerPage: state.usersPage.usersPerPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowingInProgress: state.usersPage.isFollowingInProgress,
+        users: getUsersSuperSelector(state),
+        usersPerPage: getUsersPerPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getFetching(state),
+        isFollowingInProgress: getIsFollowingInProgress(state),
     }
 };
 const mapDispatchToProps = (dispatch) => {

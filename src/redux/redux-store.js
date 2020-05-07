@@ -5,7 +5,8 @@ import navbarPageReducer from "./navbarPageReducer"
 import userReduser from "./usersPageReducer";
 import AuthMeRdeucer from "./AuthMeReducer";
 import thunkMiddleware from "redux-thunk";
-import {reducer as formReducer} from "redux-form"
+import {reducer as formReducer} from "redux-form";
+import AppReducer from './AppReducer'
 
 let redusers = combineReducers({
     profilePage: profilePageReducer,
@@ -14,6 +15,7 @@ let redusers = combineReducers({
     usersPage: userReduser,
     AuthMe: AuthMeRdeucer,
     form: formReducer,
+    App : AppReducer,
 })
 
 

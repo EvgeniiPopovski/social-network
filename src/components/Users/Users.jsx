@@ -19,30 +19,30 @@ const Users = (props) => {
 
                             <NavLink to={'/profile/' + u.id}>
                                 {u.photos.small === null ? <img className={s.image}
-                                                                src={'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png'}/> :
-                                    <img className={s.image} src={u.photos.small}/>}
+                                    src={'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png'} /> :
+                                    <img className={s.image} src={u.photos.small} />}
                             </NavLink>
 
                             <div>
-                                {u.followed ? <button  disabled={props.isFollowingInProgress.some( id => id === u.id)} className={s.followButton}
-                                                      onClick={() => {
-                                                          debugger;
-                                                          props.unFollowUserThunkCreator(u.id)
-                                                      }
-                                                      }>Unfollow</button>
+                                {u.followed ? <button disabled={props.isFollowingInProgress.some(id => id === u.id)} className={s.followButton}
+                                    onClick={() => {
+                                        debugger;
+                                        props.unFollowUserThunkCreator(u.id)
+                                    }
+                                    }>Unfollow</button>
 
-                                    : <button disabled={props.isFollowingInProgress.some( id => id === u.id)} className={s.followButton}
-                                              onClick={() => {
-                                                  debugger;
-                                                  props.followUserThunkCreator(u.id)
-                                                  }
-                                              }>Follow</button>}
+                                    : <button disabled={props.isFollowingInProgress.some(id => id === u.id)} className={s.followButton}
+                                        onClick={() => {
+                                            debugger;
+                                            props.followUserThunkCreator(u.id)
+                                        }
+                                        }>Follow</button>}
                             </div>
                         </div>
                         <p>{u.name}</p>
                         <p>{u.status}</p>
                         <p className={s.location}>
-                            <span>{'u.location.country'}</span> <br/>
+                            <span>{'u.location.country'}</span> <br />
                             <span>{'u.location.city'}</span>
                         </p>
                     </div>
@@ -50,7 +50,7 @@ const Users = (props) => {
             }
             <div className={s.spanContainer}>
                 {pages.map(page => (<span onClick={(e) => (props.onPageChange(page))}
-                                          className={props.currentPage === page && s.selectedPage}>{page}</span>))}
+                    className={props.currentPage === page && s.selectedPage}>{page}</span>))}
             </div>
         </div>
     );

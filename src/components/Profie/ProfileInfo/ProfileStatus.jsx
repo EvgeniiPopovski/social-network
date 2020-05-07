@@ -19,7 +19,6 @@ class ProfileStatus extends React.Component {
     };
     deactivateEditMode () {
         this.setState({editMode : false});
-        debugger;
         this.props.updateStatus (this.state.status);
     }
     statusChange  (e)  {
