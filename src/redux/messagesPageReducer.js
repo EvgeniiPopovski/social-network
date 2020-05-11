@@ -1,4 +1,3 @@
-const UPDATE_MESSAGE_TEXT = 'UDATE-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 const initialState = {

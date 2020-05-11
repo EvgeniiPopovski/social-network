@@ -10,9 +10,9 @@ const maxLength10 = maxLengthCreator(10)
 
 const Dialogs = (props) => {
     let dialogElements =
-        props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id} />));
+        props.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id} key={dialog.id} />));
     let messagesElements =
-        props.messages.map((message) => (<MessageItem text={message.text} id={message.id} />));
+        props.messages.map((message) => (<MessageItem text={message.text} id={message.id} key={message.id}/>));
 
     let addMessage = (messageText) => {
         props.addMessage(messageText);

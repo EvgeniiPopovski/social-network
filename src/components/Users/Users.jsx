@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Users.module.css'
-import {NavLink} from "react-router-dom";
 
+import UserLisrItem from './UserslistItem'
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.usersPerPage);
@@ -14,38 +14,15 @@ const Users = (props) => {
         <div>
             {
                 props.users.map(u => (
-                    <div key={u.id} className={s.userWrapper}>
-                        <div className={s.photoAndButton}>
-
-                            <NavLink to={'/profile/' + u.id}>
-                                {u.photos.small === null ? <img className={s.image}
-                                    src={'https://i.kym-cdn.com/photos/images/facebook/000/215/813/d57.png'} /> :
-                                    <img className={s.image} src={u.photos.small} />}
-                            </NavLink>
-
-                            <div>
-                                {u.followed ? <button disabled={props.isFollowingInProgress.some(id => id === u.id)} className={s.followButton}
-                                    onClick={() => {
-                                        debugger;
-                                        props.unFollowUserThunkCreator(u.id)
-                                    }
-                                    }>Unfollow</button>
-
-                                    : <button disabled={props.isFollowingInProgress.some(id => id === u.id)} className={s.followButton}
-                                        onClick={() => {
-                                            debugger;
-                                            props.followUserThunkCreator(u.id)
-                                        }
-                                        }>Follow</button>}
-                            </div>
-                        </div>
-                        <p>{u.name}</p>
-                        <p>{u.status}</p>
-                        <p className={s.location}>
-                            <span>{'u.location.country'}</span> <br />
-                            <span>{'u.location.city'}</span>
-                        </p>
-                    </div>
+                   <UserLisrItem 
+                    key={u.id}
+                    userId={u.id} 
+                    photos={u.photos} followed={u.followed} 
+                    isFollowingInProgress={props.isFollowingInProgress}
+                    followUserThunkCreator={props.followUserThunkCreator} 
+                    unFollowUserThunkCreator={props.unFollowUserThunkCreator}
+                    name={u.name} 
+                    status = {u.status}/>
                 ))
             }
             <div className={s.spanContainer}>

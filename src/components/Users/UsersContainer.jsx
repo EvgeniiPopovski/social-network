@@ -11,9 +11,7 @@ import { getUsersSuperSelector, getUsersPerPage, getTotalUsersCount, getCurrentP
 
 
 class UsersAPIComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage , this.props.usersPerPage)
     }

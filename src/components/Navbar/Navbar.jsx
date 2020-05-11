@@ -5,7 +5,7 @@ import FriendsPreview from "./FriendsPreview/FriendsPreview";
 
 const Navbar = (props) => {
 
-    let friendsListPreviw = props.friends.map( (friend) => (<FriendsPreview name={friend.name} id={friend.id}/>))
+    let friendsListPreviw = props.friends.map( (friend) => (<FriendsPreview name={friend.name} id={friend.id} key={friend.id}/>))
 
     return (
         <nav className={s.nav}>

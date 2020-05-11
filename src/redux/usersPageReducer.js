@@ -26,29 +26,17 @@ const userReduser= (state = InitialState, action) => {
 
     switch (action.type) {
         case FOLLOW : {
-            let stateCopy = {
+            return   {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true};
-                    }
-                    return u
-                })
-            };
-            return stateCopy;
+                users: FollowUnfollowToggleUtilitie(state.users , action.userId , "id" , {followed: true})
+            }
         }
         case UNFOLLOW: {
-            let stateCopy = {
+            return  {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false};
-                    }
-                    return u
-                })
-            };
-            return stateCopy;
-        };
+                users: FollowUnfollowToggleUtilitie(state.users , action.userId , "id" , {followed: false})
+            }
+        }
         case SET_USERS :{
             let stateCopy = {...state, users: [...action.users]};
             return stateCopy;
@@ -66,7 +54,6 @@ const userReduser= (state = InitialState, action) => {
             return stateCopy
         }
         case TOGGLE_IS_FOLLOWING_INPROGRES: {
-            debugger;
             let stateCopy = {...state,
                 isFollowingInProgress: action.isFollowing
                     ? [...state.isFollowingInProgress, action.userId]
@@ -105,44 +92,60 @@ export const toggleFollowingInProgressAC = (followingPropgress, userId) => {
 }
 
 export const getUsersThunkCreator = (currentPage, usersPerPage)=> {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(isFetchingToggleAC(true));
-        usersAPI.getUsers(currentPage, usersPerPage)
-            .then((data) => {
-                dispatch(setUsersAC(data.items));
+        let response = await usersAPI.getUsers(currentPage, usersPerPage)
+                dispatch(setUsersAC(response.items));
                 dispatch(setCurrentPageAC(currentPage))
-                dispatch(setTotalUsersCountAC(data.totalCount));
+                dispatch(setTotalUsersCountAC(response.totalCount));
                 dispatch(isFetchingToggleAC(false));
-            });
     }
 }
 
+
+
+const FollowUnfollowToggle = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleFollowingInProgressAC(true, userId))
+    let response = await apiMethod(userId)
+    if (response.resultCode == 0) {
+        dispatch(actionCreator(userId))
+    }
+    dispatch(toggleFollowingInProgressAC(false, userId))
+}
+
+
+
+
 export const unFollowUserThunkCreator = (userId) => {
-    return (dispatch) => {
-    debugger;
-        dispatch(toggleFollowingInProgressAC(true, userId))
-        usersAPI.unfollowUser(userId)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(unfollowAC(userId))
-                }
-                dispatch(toggleFollowingInProgressAC(false, userId))
-            })
+    return async (dispatch) => {FollowUnfollowToggle(dispatch,userId, usersAPI.unfollowUser.bind(usersAPI), unfollowAC)
     }
 };
 
 export const followUserThunkCreator = (userId) => {
-    return (dispatch) => {
-    debugger;
-        dispatch(toggleFollowingInProgressAC(true, userId))
-        usersAPI.followUser(userId)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(followAC(userId))
-                }
-                dispatch(toggleFollowingInProgressAC(false, userId))
-            })
+    return async (dispatch) => {FollowUnfollowToggle(dispatch,userId, usersAPI.followUser.bind(usersAPI), followAC)
     }
-}
+};
 
 export default userReduser;
+
+
+// let stateCopy = {
+//     ...state,
+//     users: state.users.map(u => {
+//         if (u.id === action.userId) {
+//             return {...u, followed: false};
+//         }
+//         return u
+//     })
+// }
+
+
+const FollowUnfollowToggleUtilitie = (itemsArray , itemId , objPropName, newProperty) => {
+    return itemsArray.map(u => {
+        if (u[objPropName] === itemId) {
+            return {...u, ...newProperty}
+        }
+        return u
+    })
+}
+

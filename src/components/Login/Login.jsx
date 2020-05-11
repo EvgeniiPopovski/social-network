@@ -35,27 +35,30 @@ export default connect (mapStateToProps, {loginThunkCreator}) (Login)
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field name='Email' component={Input} validate={required} placeholder="Login" />
+            {fieldConstructor('Email', Input , required , null, 'Login' , '')}
+            {fieldConstructor('Password' , Input , required , 'password' , 'Password', '')}
+            {fieldConstructor('rememberMe', 'input', null , 'checkbox' , null , 'Remember Me')}
+            {props.error &&
+                <div className={s.formError}>
+                    {props.error}
                 </div>
-                <div>
-                    <Field name='Password' component={Input} validate={required} type='password' placeholder="Password"/>
-                </div>
-                <div>
-                    <Field name='rememberMe' component="input" type='checkbox'  /> Remember Me
-                </div>
-                {props.error && 
-                    <div className={s.formError}>
-                       {props.error}
-                    </div>
-                }
-                <div>
-                    <button>Log In</button>
-                </div>
-            </form>
+            }
+            <div>
+                <button>Log In</button>
+            </div>
+        </form>
     )
 }
 const LoginReduxForm = reduxForm({
     // a unique name for the form
     form: 'Login'
   })(LoginForm)
+
+const fieldConstructor = (fieldName, fieldComponent, fieldValidate, fieldType,fieldPlaceholder , FieldText) => {
+    return (
+        <div>
+            <Field name={fieldName} component={fieldComponent} validate={fieldValidate} type={fieldType} placeholder={fieldPlaceholder} />
+            {FieldText}
+        </div>
+    )
+}

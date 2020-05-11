@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 export const usersAPI = {
-    getUsers  (currentPage = 1, usersPerPage = 10)  {
+    getUsers (currentPage = 1, usersPerPage = 10)  {
         return axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${usersPerPage}`, {withCredentials: true})
             .then(response => response.data);
     },
@@ -22,6 +22,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
+    
     setUserProfileAPI  (userId) {
         return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => response.data)
