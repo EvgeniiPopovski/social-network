@@ -7,7 +7,7 @@ const initialState = {
     initialized: false
 }
 
- const  AppReducer = (state = initialState, action) => {
+const  AppReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_INITIALIZED: 
         
