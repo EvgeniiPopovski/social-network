@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect} from "react-router-dom";
 import News from "./components/News/News.jsx";
 import Music from "./components/Music/Music.jsx";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -22,8 +22,16 @@ const DialogsContainer = React.lazy(() =>
 );
 
 class App extends React.Component {
+  catchAllUnhandledEroors = () => {
+    alert('Some Eroor occured')
+  }
   componentDidMount() {
     this.props.setInitializeThunkCreator();
+    window.addEventListener('unhandledrejection', this.catchAllUnhandledEroors)
+  }
+
+  conponentWillUnmount () {
+    window.removeEventListener('unhandledrejection', this.catchAllUnhandledEroors)
   }
 
   render() {
@@ -35,23 +43,30 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar friends={this.props.store.getState().navbarPage.friends} />
         <div className="app-content">
+          <Switch />
           <Route
-            path="/dialogs"
-            render={() => {
-              return <Suspense fallback={<Preloader />}>
-                <DialogsContainer store={this.props.store} />
-              </Suspense>
-            }}
-          />
-          <Route
-            path="/profile/:userId?"
-            render={() => <ProfileContainer store={this.props.store} />}
-          />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/news" component={News} />
-          <Route path="/music" component={Music} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/login" component={Login} />
+              exact
+              path="/"
+              render={() => <Redirect to='/profile' />}
+            />
+            <Route
+              path="/dialogs"
+              render={() => {
+                return <Suspense fallback={<Preloader />}>
+                  <DialogsContainer store={this.props.store} />
+                </Suspense>
+              }}
+            />
+            <Route
+              path="/profile/:userId?"
+              render={() => <ProfileContainer store={this.props.store} />}
+            />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/news" component={News} />
+            <Route path="/music" component={Music} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/login" component={Login} />
+          <Switch />
         </div>
       </div>
     );

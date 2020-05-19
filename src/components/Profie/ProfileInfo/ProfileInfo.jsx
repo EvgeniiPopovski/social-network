@@ -1,59 +1,100 @@
-import React from 'react';
-import s from './ProfileInfo.module.css';
+import React, {useState} from "react";
+import s from "./ProfileInfo.module.css";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileAvatar from "./ProfileAvatar";
+import {ProfileDataReduxForm} from './ProfileDataForm';
 
-const getContactsInfo = (obj) => {
-    let i = 0;
-    let contactsArray = Object.values(obj).map(contactInfo => <span key={contactInfo || i++}>{contactInfo}</span>)
-    return contactsArray
+
+  
+  
+
+
+const ProfileInfo = ({ profile, isOwner, status, updateStatus, saveFile, saveProfile }) => {
+  let [editMode, setEditMode] = useState(false);
+  const onSubmit= (formData) => {
+    console.log(formData)
+    saveProfile(formData)
+    setEditMode(false)
+  }
+
+  return editMode ? (
+    <ProfileDataReduxForm
+      profile={profile}
+      isOwner={isOwner}
+      saveFile={saveFile}
+      status={status}
+      updateStatus={updateStatus} 
+      onSubmit={onSubmit}
+      initialValues={profile}
+    />
+  ) : (
+    <ProfileData
+      profile={profile}
+      isOwner={isOwner}
+      saveFile={saveFile}
+      status={status}
+      updateStatus={updateStatus}
+      activateEditMode={() => setEditMode(true)}
+    />
+  );
+};
+
+
+
+const ProfileData = ({profile, isOwner, saveFile, status, updateStatus, activateEditMode}) => {
+
+  let answerToggle = "НЕТ";
+  if (profile !== null && profile.lookingForAJob === true) {
+    answerToggle = "ДА!";
+  }
+
+
+  return (
+    <div>
+      {isOwner && <button onClick={activateEditMode}>Edit</button>}
+
+      <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+      <div className={s.wrapper}>
+        <ProfileAvatar
+          isOwner={isOwner}
+          saveFile={saveFile}
+          profile={profile}
+        />
+        <div className={s.fullnameUser}>
+          Полное Имя:{" "}
+          {profile !== null ? <span>{profile.fullName}</span> : null}
+        </div>
+        <div className={s.aboutUser}>
+          Обо мне: {profile !== null ? profile.aboutMe : null}
+        </div>
+        <div className={s.contactsUser}>
+          { profile && <p>
+            <b>Контакты</b>{" "}
+            {Object.keys(profile.contacts).map((key) => {
+              return (
+                <div>
+                  <b>{key}:</b>
+                  {profile.contacts[key]}
+                </div>
+              );
+            })}
+          </p>}
+        </div>
+        <div className={s.jobLookingUser}>
+          <span>
+            В поисках работы:<span>{answerToggle}</span>{" "}
+          </span>
+        </div>
+        <p className={s.lookingForJobDescription}>
+          Интересуюсь Вакансиями:{" "}
+          {profile !== null ? (
+            <span>{profile.lookingForAJobDescription}</span>
+          ) : null}
+        </p>
+      </div>
+    </div>
+  );
 }
 
-const ProfileInfo = (props) => {
-    let answerToggle = "";
-    if (props.profile !== null) {
-        if (props.profile.lookingForAJob === true) {
-            answerToggle = "ДА!"
-        } else {
-            answerToggle = "НЕТ! "
-        }
-    }
-
-    return (
-        <div>
-            <div className={s.wrapWalper}>
-                <img className={s.walper}
-                     src='https://avatars.mds.yandex.net/get-pdb/921693/bb741f14-fd0f-45c7-950d-04767ead1825/s1200'
-                     alt='Аватар Пользователя'/>
-            </div>
-            <ProfileStatusWithHooks status={props.status}  updateStatus = {props.updateStatus}/>
-            <div className={s.wrapper}>
-                <div className={s.avatar}>
-                    {props.profile !== null ? <img src={props.profile.photos.large} alt='Аватар Пользователя'/> : null}
-                </div>
-                <div className={s.fullnameUser}>
-                    Полное Имя: {props.profile !== null ? <span>{props.profile.fullName}</span> : null}
-                </div>
-                <div className={s.aboutUser}>
-                     Обо мне: {props.profile !== null ? props.profile.aboutMe : null}
-                </div>
-                <div className={s.contactsUser}>
-                    <p>Контакты в социальных сетях: {props.profile !== null 
-                        ?<span>
-                            {getContactsInfo(props.profile.contacts)}
-                        </span>
-                        : null}
-                    </p>
-                </div>
-                <div className={s.jobLookingUser}>
-                    <span>В поисках работы:<span>{answerToggle}</span> </span>
-                </div>
-                <p className={s.lookingForJobDescription}>
-                    Интересуюсь Вакансиями: {props.profile !== null ? <span>{props.profile.lookingForAJobDescription}</span> : null}
-                </p>
-            </div>
-        </div>
-
-    )
-};
 
 export default ProfileInfo;

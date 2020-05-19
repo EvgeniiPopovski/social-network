@@ -1,9 +1,11 @@
 import {profileAPI} from "../API/API";
 
-const ADD_NEW_POST = 'ADD-NEW-POST';
-const DELETE_POST = 'DELETE_POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = "STE_STATUS"
+const ADD_NEW_POST = 'ADD-NEW-POST',
+    DELETE_POST = 'DELETE_POST',
+    SET_USER_PROFILE = 'SET_USER_PROFILE',
+    SET_STATUS = "SET_STATUS",
+    SET_USER_AVATAR = "SET_USER_AVATAR";
+
 
 // в старом State Ээто ProfilePage
 const initialState =  {
@@ -42,6 +44,10 @@ const profilePageReducer = (state = initialState, action) => {
             return {
                 ...state, posts: state.posts.filter(post => post.id !== action.postId)
             };
+        case SET_USER_AVATAR: 
+            return {
+                ...state, profile: {...state.profile, photos: action.photos }
+            }
         default:
             return state;
     }
@@ -64,6 +70,10 @@ export const setUserProfileAC = (profile) => {
     return {type: SET_USER_PROFILE, profile }
 };
 
+export const setUserAvatar = (photos) => {
+    return {type:  SET_USER_AVATAR, photos}
+}
+
 
 export const setUserProfileThunkCreator =  (userId) =>  {
     return async (dispatch) => {
@@ -74,8 +84,13 @@ export const setUserProfileThunkCreator =  (userId) =>  {
 
 export const getStatusThunkCreator = (userId) => {
     return async (dispatch) => {
+        try{
         let response = await profileAPI.getStatus(userId)
             dispatch(setStatusAC(response.data))
+        }
+        catch (error) {
+            alert('АШИБКА')
+        }
     }
 };
 
@@ -87,5 +102,25 @@ export const updateStatusThunkCreator = (status) => {
         }
     }
 };
+
+export const saveFileThunkCreator = (filePath) => {
+    return async (dispatch) => {
+        let response = await profileAPI.saveFile(filePath);
+        if (response.data.resultCode === 0) {
+            dispatch(setUserAvatar(response.data.data.photos))
+        }
+    }
+}
+
+export const saveProfileThunkCreator = (profileData) => {
+    
+    return async(dispatch , getState) => {
+        const userId = getState().AuthMe.userId
+        let response = await profileAPI.setNewUserProfileData(profileData)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserProfileThunkCreator(userId))
+        }
+    }
+}
 
 export default profilePageReducer

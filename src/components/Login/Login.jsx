@@ -7,9 +7,10 @@ import {loginThunkCreator} from './../../redux/AuthMeReducer'
 import { Redirect } from "react-router-dom";
 import s from './../common/FormControls/FormControls.module.css'
 
+
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.loginThunkCreator(formData.Email , formData.Password , formData.remeberMe)
+        props.loginThunkCreator(formData.Email , formData.Password , formData.remeberMe , formData.captcha)
         console.log(formData)
     }
     if (props.isLogged) {
@@ -18,14 +19,15 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login Page</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captcha={props.captchaUrl}/>
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        isLogged: state.AuthMe.isLogged
+        isLogged: state.AuthMe.isLogged,
+        captchaUrl: state.AuthMe.captchaUrl
     }
 }
 
@@ -33,12 +35,15 @@ export default connect (mapStateToProps, {loginThunkCreator}) (Login)
 
 
 const LoginForm = (props) => {
+    
     return (
         <form onSubmit={props.handleSubmit}>
-            {fieldConstructor('Email', Input , required , null, 'Login' , '')}
-            {fieldConstructor('Password' , Input , required , 'password' , 'Password', '')}
-            {fieldConstructor('rememberMe', 'input', null , 'checkbox' , null , 'Remember Me')}
-            {props.error &&
+            {fieldConstructor('Email', Input , required , null, 'Login' )}
+            {fieldConstructor('Password' , Input , required , 'password' , 'Password')}
+            <label> {fieldConstructor('rememberMe', 'input', null , 'checkbox' , null )}Remeber Me</label><br/>
+            {props.captcha && <img src={props.captcha} alt="captcha"/>}
+            {props.captcha && fieldConstructor('captcha' , 'input' , required , null, null)}
+            {props.error && 
                 <div className={s.formError}>
                     {props.error}
                 </div>
@@ -50,15 +55,12 @@ const LoginForm = (props) => {
     )
 }
 const LoginReduxForm = reduxForm({
-    // a unique name for the form
-    form: 'Login'
-  })(LoginForm)
+  // a unique name for the form
+  form: "Login",
+})(LoginForm);
 
-const fieldConstructor = (fieldName, fieldComponent, fieldValidate, fieldType,fieldPlaceholder , FieldText) => {
+export const fieldConstructor = (fieldName, fieldComponent, fieldValidate, fieldType,fieldPlaceholder) => {
     return (
-        <div>
-            <Field name={fieldName} component={fieldComponent} validate={fieldValidate} type={fieldType} placeholder={fieldPlaceholder} />
-            {FieldText}
-        </div>
+        <Field name={fieldName} component={fieldComponent} validate={fieldValidate} type={fieldType} placeholder={fieldPlaceholder} />
     )
 }

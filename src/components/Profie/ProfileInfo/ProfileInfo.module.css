@@ -16,9 +16,23 @@
 
 }
 .avatar {
-
-
+    width: 300px;
+    height: 300px;
 }
+
+.photo {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.photo img {
+    min-width: 100%;
+    min-height: 100%;
+    flex-shrink: 0;
+}
+
 .aboutUser {
     color: white;
     font-size: 16pt;
